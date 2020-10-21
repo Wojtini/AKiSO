@@ -1,0 +1,93 @@
+Input
+Store Zakres
+/LOOP PIERWSZYCH
+pierwszeloop, LOAD AktualnaLiczba
+Subt Zakres
+Skipcond 400
+Jump pierwszecheck
+Halt /Zatrzymanie wyczerpanie zakresu
+
+//Sprawdzenie czy liczba jest pierwsza
+pierwszecheck,Load AktualnaLiczba
+Store AktualnyDzielnik
+Subt one
+Store AktualnyDzielnik
+//Sprawdzenie czy doszlismy do jedynki
+IteracjaLoop, Load AktualnyDzielnik
+Subt one
+Skipcond 400
+Jump git
+Jump znalezionoPierwsze
+git, Add one
+//Ladowanie do dzielenia
+Store Y
+Load AktualnaLiczba
+Store X
+Jump startdziel
+koniecdzielenia, Load dzielreszta
+Skipcond 400 // dzielenie bez reszty
+Jump nextone
+Jump znalezionoDzielnik
+//Jump do nast iteracji
+nextone, Load AktualnyDzielnik
+Subt one
+Store AktualnyDzielnik
+Jump IteracjaLoop
+znalezionoPierwsze, Load AktualnaLiczba
+Output
+Add one
+Store AktualnaLiczba
+Jump pierwszeloop
+znalezionoDzielnik, Load AktualnaLiczba
+Add one
+Store AktualnaLiczba
+Jump pierwszeloop
+//Koniec sprawdzania
+Jump pierwszeloop
+
+
+// (x/y) -> dzielresult,dzielreszta
+startdziel, Clear 
+Store dzielresult
+Store dzielreszta
+dzielwhile, Load X
+Subt Y
+Store X
+Load dzielresult
+Add one
+Store dzielresult
+Load X
+Skipcond 800
+Jump konieccalk
+Jump dzielwhile
+
+konieccalk, Load X
+Skipcond 400
+Jump Istreszta
+Load dzielresult
+Jump Drukujwynik
+
+Istreszta, Load dzielresult
+Subt one
+Store dzielresult
+Load X
+Add Y
+Store X
+Jump Drukujwynik
+
+Drukujwynik, Load dzielresult
+Load X
+Store dzielreszta
+Jump koniecdzielenia
+
+//Constants
+one, DEC 1
+//Dzielenie stuff
+X, DEC 90
+Y, DEC 11
+dzielresult, DEC 0
+dzielreszta, DEC 0
+//Pierwsze stuff
+Zakres, DEC 50
+AktualnaLiczba, DEC 2
+AktualnyDzielnik, DEC 2

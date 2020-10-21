@@ -1,0 +1,46 @@
+Input
+Store X
+Input
+Store Y
+// (x/y) -> dzielresult,dzielreszta
+startdziel, Clear
+Store dzielresult
+Store dzielreszta
+dzielwhile, Load X
+Subt Y
+Store X
+Load dzielresult
+Add one
+Store dzielresult
+Load X
+Skipcond 800
+Jump konieccalk
+Jump dzielwhile
+
+konieccalk, Load X
+Skipcond 400
+Jump Istreszta
+Load dzielresult
+Output 
+Jump Drukujwynik
+
+Istreszta, Load dzielresult
+Subt one
+Store dzielresult
+Load X
+Add Y
+Store X
+Jump Drukujwynik
+
+Drukujwynik, Load dzielresult
+Output
+Load X
+Store dzielreszta
+Output
+Halt
+
+one, DEC 1
+X, DEC 90
+Y, DEC 11
+dzielresult, DEC 0
+dzielreszta, DEC 0

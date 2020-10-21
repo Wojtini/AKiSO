@@ -1,0 +1,77 @@
+Clear
+Store result
+
+dziel, Load X //Dzieli X przez Y i zachowuje w result
+Subt Y
+Store X
+Load result
+Add one
+Store result
+Load X
+Skipcond 800
+Jump konieccalk
+Jump dziel
+
+konieccalk, Load X
+Skipcond 400
+Jump policzreszte //kiedy ac != 0
+Jump result
+
+policzreszte, Load X
+Add Y
+Store X
+Load result
+Subt one
+Store result
+Load result
+Output
+//While loop do policzenia reszty
+liczresztep1, Load Y //Dzieli Y przez X i zachowuje w reszta
+Subt X
+Store Y
+Load reszta
+Add one
+Store reszta
+Load Y
+Skipcond 000 //skipnie jak ac bedzie juz minusowe
+Jump liczresztep1
+
+Load reszta //poprawka
+Subt one
+Store reszta
+Output 
+//tutaj drugie to cos
+
+
+
+liczresztep2, Load dok //Dzieli dok przez reszta i zachowuje w reszta2
+Subt reszta
+Store dok
+Load reszta2
+Add one
+//Wynik czesc calkowita , smiec , czesc ulamkowa ktora trzeba podzielic przed dok=100
+
+Store reszta2
+Load dok
+Skipcond 000 //skipnie jak ac bedzie juz minusowe
+Jump liczresztep2
+
+Load reszta2
+subt one
+Output
+Halt
+
+resultprint, Load result
+Output
+Jump halt
+
+halt,    Halt
+
+
+one, DEC 1
+X, DEC 21
+Y, DEC 20
+result, DEC 0
+reszta, DEC 0
+reszta2, DEC 0
+dok, DEC 100
