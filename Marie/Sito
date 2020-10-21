@@ -1,0 +1,64 @@
+Input
+Add TableStart
+Subt One
+Store Koniec
+Jump loop
+Koniec, HEX 00A8
+
+loop, LoadI CurrTableAdress
+Skipcond 400
+Jump Sprawdzkolejnaliczbe
+Jump ZnalezionoPierwsza
+
+
+ZnalezionoPierwsza, Load CurrTableAdress
+Subt TableNumber
+Store ANumber
+Output
+Load CurrTableAdress
+Store AAdress
+//Loop do wyzerowania kolejnych n*x
+while,Load AAdress
+//Sprawdzenie czy poza tablica
+Subt Koniec
+Skipcond 000
+Jump Sprawdzkolejnaliczbe
+Add Koniec
+//koniec sprawdzenia
+Add ANumber
+Store AAdress
+Load Two
+StoreI AAdress
+Jump while
+//koniec loopa
+
+
+Sprawdzkolejnaliczbe, Load CurrTableAdress
+Add One
+//Sprawdzenie czy poza tablica
+Subt Koniec
+Skipcond 000
+Halt
+Add Koniec
+//koniec sprawdzenia
+Store CurrTableAdress
+Jump loop
+
+//O ile bedziemy skakac
+ANumber, DEC 0
+//Aktualny adres
+AAdress, DEC 0
+
+LOAD One
+StoreI TableStart
+Load TableStart
+Subt TableNumber
+Output
+Halt
+
+One, Dec 1 
+Two, Dec 2 
+//Zeby wziasc index tablicy tj odleglosc od adresu TableStart
+TableNumber, HEX 009E
+CurrTableAdress, HEX 00A0
+TableStart, HEX 00A0
