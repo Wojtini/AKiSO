@@ -1,21 +1,34 @@
 Input
+Store Start
+
+Input
 Add TableStart
 Subt One
 Store Koniec
+
 Jump loop
 Koniec, HEX 00A8
+Start, DEC 0000
 
 loop, LoadI CurrTableAdress
 Skipcond 400
 Jump Sprawdzkolejnaliczbe
 Jump ZnalezionoPierwsza
 
+OutputStart, Subt Start
+SkipCond 800
+Jump OutputEnd
+Add Start
+Output
+Jump OutputEnd
 
 ZnalezionoPierwsza, Load CurrTableAdress
 Subt TableNumber
 Store ANumber
-Output
-Load CurrTableAdress
+//Output
+Jump OutputStart 
+//End output
+OutputEnd, Load CurrTableAdress
 Store AAdress
 //Loop do wyzerowania kolejnych n*x
 while,Load AAdress
@@ -57,7 +70,7 @@ Output
 Halt
 
 One, Dec 1 
-Two, Dec 2 
+Two, Dec 2
 //Zeby wziasc index tablicy tj odleglosc od adresu TableStart
 TableNumber, HEX 009E
 CurrTableAdress, HEX 00A0

@@ -1,7 +1,36 @@
 Input
 Store X
-Input
+
+Skipcond 000
+Jump InputY
+
+Subt X
+Subt X
+Store X
+Load negtag
+Add one
+Store negtag
+Jump InputY
+
+InputY, Input
 Store Y
+
+Skipcond 000
+Jump afterInput
+
+Subt Y
+Subt Y
+Store Y
+Load negtag
+Add one
+Store negtag
+Jump afterInput
+negtag, DEC 0
+
+afterInput, Skipcond 400
+Jump startdziel
+Halt
+
 // (x/y) -> dzielresult,dzielreszta
 startdziel, Clear
 Store dzielresult
@@ -20,8 +49,6 @@ Jump dzielwhile
 konieccalk, Load X
 Skipcond 400
 Jump Istreszta
-Load dzielresult
-Output 
 Jump Drukujwynik
 
 Istreszta, Load dzielresult
@@ -32,7 +59,24 @@ Add Y
 Store X
 Jump Drukujwynik
 
-Drukujwynik, Load dzielresult
+Drukujwynik,Load negtag
+Subt one
+Skipcond 400
+Jump DrukujDodatnie
+Jump DrukujUjemne
+
+DrukujUjemne,Load dzielresult
+Subt dzielresult
+Subt dzielresult
+Output
+Load X
+Subt X
+Subt X
+Store dzielreszta
+Output
+Halt
+
+DrukujDodatnie,Load dzielresult
 Output
 Load X
 Store dzielreszta
